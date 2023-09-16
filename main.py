@@ -18,5 +18,6 @@ dates = ["2022-12-10", "2022-12-11", "2022-12-12"]
 temperatures = [10, 11, 20]
 # x and y take list of arrays.
 figure = px.line(x=dates, y=temperatures, labels={"x": "Dates", "y": "Temperatures (C}"})
-# It will take the a figure created by plotly.
+
+# It will take a figure created by plotly.
 st.plotly_chart(figure)
