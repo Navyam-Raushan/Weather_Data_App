@@ -1,5 +1,6 @@
 import streamlit as st
 import plotly.express as px
+from backend import get_data
 
 st.title("Weather Forecast for the Next Days")
 # Put dynamic things into variable (Rules)
@@ -14,10 +15,9 @@ graph_label = f"{option} for the next {days} days in {place}."
 # use f11 to bookmark it.
 st.subheader(graph_label)
 
-dates = ["2022-12-10", "2022-12-11", "2022-12-12"]
-temperatures = [10, 11, 20]
+d, t = get_data(place, days, option)
 # x and y take list of arrays.
-figure = px.line(x=dates, y=temperatures, labels={"x": "Dates", "y": "Temperatures (C}"})
+figure = px.line(x=d, y=t, labels={"x": "Dates", "y": "Temperatures (C}"})
 
 # It will take a figure created by plotly.
 st.plotly_chart(figure)
