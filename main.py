@@ -11,6 +11,8 @@ days = st.slider("Forecast Days", min_value=1, max_value=5,
 
 option = st.selectbox("Select data to view",
                       options=("Temperature", "Sky"))
+
+# Error handling for invalid place
 try:
     if place:
         filtered_data = get_data(place, days, option)
@@ -36,10 +38,14 @@ try:
             # MAKING A DICTIONARY FOR ALL PATHS.
             img_map = {"Clear": "images/clear.png", "Clouds": "images/cloud.png",
                        "Rain": "images/rain.png", "Snow": "images/snow.png"}
+            filtered_data = get_data(place, days, option)
+            date = [d["dt_txt"] for d in filtered_data]
+            label_map = date
 
             # MAPPING IMAGES WITH KEY PAIRS AS PER CONDITION IN img_map
             images = [img_map[conditions] for conditions in sky_condition]
-            st.image(images, width=115)
+
+            st.image(images, width=115, caption=date)
 except KeyError:
     st.info("Please enter a valid place")
     print("Error: Not a valid place")
