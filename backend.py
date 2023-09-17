@@ -12,14 +12,8 @@ def get_data(place, forecast_day=None, weather_key=None):
     nr_value = 8 * forecast_day
     filtered_data = filtered_data[:nr_value]
 
-    if weather_key == "Temperature":
-        # t represents each temperature item in all nr_value list.
-        filtered_data = [t["main"]["temp"] for t in filtered_data]
-    else:
-        # Same here to get each item observe the data structure carefully.
-        filtered_data = [s["weather"][0]["main"] for s in filtered_data]
-
     return filtered_data
+# Further filtering will be done in main file so that we need one if-else.
 
 
 if __name__ == "__main__":
