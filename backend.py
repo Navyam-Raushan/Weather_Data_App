@@ -8,14 +8,20 @@ def get_data(place, forecast_day=None, weather_key=None):
     response = requests.get(url)
     data = response.json()
 
-    dates = []
-    temperature = []
-    for i in range(int(forecast_day)):
-        dates.append(data["list"][i]["dt_txt"])
-        temperature.append(data["list"][i]["main"]["temp"])
+    filtered_data = data["list"]
+    nr_value = 8 * forecast_day
+    filtered_data = filtered_data[:nr_value]
 
-    return dates,temperature
+    if weather_key == "Temperature":
+        # t represents each temperature item in all nr_value list.
+        filtered_data = [t["main"]["temp"] for t in filtered_data]
+    else:
+        # Same here to get each item observe the data structure carefully.
+        filtered_data = [s["weather"][0]["main"] for s in filtered_data]
+
+    return filtered_data
 
 
 if __name__ == "__main__":
-    print(get_data(place="Tokyo", forecast_day=3))
+    print(get_data(place="Tokyo", forecast_day=3,
+                   weather_key="Sky"))
