@@ -35,9 +35,12 @@ try:
             # """ Different ways for translating data into image we will use dictionary
             #     and list comprehension for doing all of this (this is new)
             # """
+
             # MAKING A DICTIONARY FOR ALL PATHS.
             img_map = {"Clear": "images/clear.png", "Clouds": "images/cloud.png",
                        "Rain": "images/rain.png", "Snow": "images/snow.png"}
+
+            # ADDING LABELS TO SKY CONDITION AS PER DATE/TIME.
             filtered_data = get_data(place, days, option)
             date = [d["dt_txt"] for d in filtered_data]
             label_map = date
